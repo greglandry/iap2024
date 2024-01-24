@@ -33,7 +33,7 @@
 # SHIELD_TFT   -- CY8CKIT-028-TFT shield used
 # SHIELD_SENSE -- CY8CKIT-028-SENSE shield used
 #
-SHIELD_TYPE=SHIELD_TFT
+SHIELD_TYPE=SHIELD_SENSE
 
 # Type of ModusToolbox Makefile Options include:
 #
