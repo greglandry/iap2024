@@ -63,8 +63,13 @@
 
 // Display header files
 #include "GUI.h"
-#include "cy8ckit_028_tft_pins.h"
-#include "mtb_st7789v.h"
+#if defined(COMPONENT_SHIELD_TFT)
+	#include "cy8ckit_028_tft_pins.h"
+	#include "mtb_st7789v.h"
+#elif defined(COMPONENT_SHIELD_SENSE)
+	#include "cy8ckit_028_sense_pins.h"
+	#include "mtb_ssd1306.h"
+#endif
 
 // Task header files
 #include "displayTask.h"
@@ -109,6 +114,7 @@ static void app_bt_free_buffer(uint8_t *p_data);
 /* Enable RTOS aware debugging in OpenOCD */
 volatile int uxTopUsedPriority;
 
+#if defined(COMPONENT_SHIELD_TFT)
 // Pins for the TFT display
 const mtb_st7789v_pins_t tft_pins = {.db08 = CY8CKIT_028_TFT_PIN_DISPLAY_DB8,
 									 .db09 = CY8CKIT_028_TFT_PIN_DISPLAY_DB9,
@@ -122,6 +128,9 @@ const mtb_st7789v_pins_t tft_pins = {.db08 = CY8CKIT_028_TFT_PIN_DISPLAY_DB8,
 									 .nwr = CY8CKIT_028_TFT_PIN_DISPLAY_NWR,
 									 .dc = CY8CKIT_028_TFT_PIN_DISPLAY_DC,
 									 .rst = CY8CKIT_028_TFT_PIN_DISPLAY_RST};
+#elif defined(COMPONENT_SHIELD_SENSE)
+cyhal_i2c_t i2c_obj;
+#endif
 
 // PWM for connection status LED
 cyhal_pwm_t status_pwm_obj;
@@ -209,8 +218,15 @@ static wiced_result_t app_bt_management_callback(wiced_bt_management_evt_t event
 			if(WICED_BT_SUCCESS == p_event_data->enabled.status) {
 				printf("Bluetooth Enabled\n");
 
+#if defined(COMPONENT_SHIELD_TFT)
 				// Initialize the display
 				mtb_st7789v_init8(&tft_pins);
+#elif defined(COMPONENT_SHIELD_SENSE)
+				/* Initialize the I2C to use with the OLED display */
+				cyhal_i2c_init(&i2c_obj, CYBSP_I2C_SDA, CYBSP_I2C_SCL, NULL);
+				/* Initialize the OLED display */
+				mtb_ssd1306_init_i2c(&i2c_obj);
+#endif
 
 				// Initialize the emwin library
 				GUI_Init();

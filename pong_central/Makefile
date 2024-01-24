@@ -28,6 +28,13 @@
 # Basic Configuration
 ################################################################################
 
+# Type of shield used to determine display type
+#
+# SHIELD_TFT   -- CY8CKIT-028-TFT shield used
+# SHIELD_SENSE -- CY8CKIT-028-SENSE shield used
+#
+SHIELD_TYPE=SHIELD_TFT
+
 # Type of ModusToolbox Makefile Options include:
 #
 # COMBINED    -- Top Level Makefile usually for single standalone application
@@ -85,7 +92,7 @@ VERBOSE=
 # ... then code in directories named COMPONENT_foo and COMPONENT_bar will be
 # added to the build
 #
-COMPONENTS=FREERTOS RTOS_AWARE WICED_BLE EMWIN_OSNTS
+COMPONENTS=FREERTOS RTOS_AWARE WICED_BLE EMWIN_OSNTS $(SHIELD_TYPE)
 
 # Like COMPONENTS, but disable optional code that was enabled by default.
 DISABLE_COMPONENTS=
@@ -138,6 +145,12 @@ PREBUILD=
 
 # Custom post-build commands to run.
 POSTBUILD=
+
+ifeq ($(SHIELD_TYPE),SHIELD_TFT)
+CY_IGNORE += $(SEARCH_CY8CKIT-028-SENSE) $(SEARCH_display-oled-ssd1306)
+else
+CY_IGNORE += $(SEARCH_CY8CKIT-028-TFT) $(SEARCH_display-tft-st7789v)
+endif
 
 
 ################################################################################

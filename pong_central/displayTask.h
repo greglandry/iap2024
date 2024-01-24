@@ -21,15 +21,25 @@
 #define DISPLAY_TASK_PRIORITY   (1)
 #define DISPLAY_TASK_STACK_SIZE (1024 * 2)
 
-#define SCREEN_MAX_X (320 - 1)
-#define SCREEN_MAX_Y (240 - 1)
+#if defined(COMPONENT_SHIELD_TFT)
+	#define DISPLAY_SIZE_X (320)
+	#define DISPLAY_SIZE_Y (240)
+#elif defined(COMPONENT_SHIELD_SENSE)
+	#define DISPLAY_SIZE_X (128)
+	#define DISPLAY_SIZE_Y (64)
+#else
+	#error No shield type defined. See Makefile to set the Arduino shield being used
+#endif
 
-#define PADDLE_WIDTH  (40)
-#define PADDLE_HEIGHT (10)
+#define SCREEN_MAX_X (DISPLAY_SIZE_X - 1)
+#define SCREEN_MAX_Y (DISPLAY_SIZE_Y - 1)
+
+#define PADDLE_WIDTH  (DISPLAY_SIZE_X / 16)
+#define PADDLE_HEIGHT (DISPLAY_SIZE_Y / 24)
 
 #define PADDLE_START_X (((SCREEN_MAX_X/2) - (PADDLE_WIDTH/2)))
 
-#define BALL_SIZE     (10)
+#define BALL_SIZE     (DISPLAY_SIZE_Y / 24)
 
 #define BALL_START_X (((SCREEN_MAX_X/2) - (BALL_SIZE/2)))
 

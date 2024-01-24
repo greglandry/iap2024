@@ -1,7 +1,7 @@
 /******************************************************************************
 * File Name: displayTask.c
 *
-* Description: This task updates the TFT display
+* Description: This task updates the display
 *
 ******************************************************************************/
 
