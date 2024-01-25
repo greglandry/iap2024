@@ -115,6 +115,8 @@ static void app_bt_free_buffer(uint8_t *p_data);
 volatile int uxTopUsedPriority;
 
 #if defined(COMPONENT_SHIELD_TFT)
+#define GUI_FONT (GUI_Font32B_ASCII)
+
 // Pins for the TFT display
 const mtb_st7789v_pins_t tft_pins = {.db08 = CY8CKIT_028_TFT_PIN_DISPLAY_DB8,
 									 .db09 = CY8CKIT_028_TFT_PIN_DISPLAY_DB9,
@@ -128,7 +130,9 @@ const mtb_st7789v_pins_t tft_pins = {.db08 = CY8CKIT_028_TFT_PIN_DISPLAY_DB8,
 									 .nwr = CY8CKIT_028_TFT_PIN_DISPLAY_NWR,
 									 .dc = CY8CKIT_028_TFT_PIN_DISPLAY_DC,
 									 .rst = CY8CKIT_028_TFT_PIN_DISPLAY_RST};
+
 #elif defined(COMPONENT_SHIELD_SENSE)
+#define GUI_FONT (GUI_Font13B_ASCII)
 cyhal_i2c_t i2c_obj;
 #endif
 
@@ -290,7 +294,7 @@ static wiced_result_t app_bt_management_callback(wiced_bt_management_evt_t event
 					printf("Scanning stopped\r\n");
 					cyhal_pwm_set_duty_cycle(&status_pwm_obj, LED_OFF_DUTY, 2);    // LED off when not advertising
 					GUI_Clear();                                                   // Clear the display
-					GUI_SetFont(&GUI_Font32B_ASCII);                               // Font size
+					GUI_SetFont(&GUI_FONT);                                		   // Font size
 					GUI_DispString("Scanning stopped");                            // Display advertising message
 					break;
 
@@ -298,7 +302,7 @@ static wiced_result_t app_bt_management_callback(wiced_bt_management_evt_t event
 					printf("High duty scanning\r\n");
 					cyhal_pwm_set_duty_cycle(&status_pwm_obj, LED_BLINK_DUTY, 2);    // LED blinks when advertising
 					GUI_Clear();                                                     // Clear the display
-					GUI_SetFont(&GUI_Font32B_ASCII);                                 // Font size
+					GUI_SetFont(&GUI_FONT);                                 		 // Font size
 					GUI_DispString("High duty scanning");                            // Display advertising message
 					break;
 
@@ -306,7 +310,7 @@ static wiced_result_t app_bt_management_callback(wiced_bt_management_evt_t event
 					printf("Low duty scanning\r\n");
 					cyhal_pwm_set_duty_cycle(&status_pwm_obj, LED_BLINK_DUTY, 2);    // LED blinks when advertising
 					GUI_Clear();                                                     // Clear the display
-					GUI_SetFont(&GUI_Font32B_ASCII);                                 // Font size
+					GUI_SetFont(&GUI_FONT);                                          // Font size
 					GUI_DispString("Low duty scanning");                             // Display advertising message
 					break;
 			}
@@ -436,7 +440,7 @@ static wiced_bt_gatt_status_t app_bt_connect_event_handler(wiced_bt_gatt_connect
 
 			cyhal_pwm_set_duty_cycle(&status_pwm_obj, LED_OFF_DUTY, 2);    // LED off when connected
 			GUI_Clear();                                                   // Clear the display
-			GUI_SetFont(&GUI_Font32B_ASCII);                               // Font size
+			GUI_SetFont(&GUI_FONT);                                        // Font size
 			GUI_DispString("Disconnected");                                // Display disconnected message
 		}
 

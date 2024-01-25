@@ -179,19 +179,19 @@ void displayTask(void *arg) {
 				taskEXIT_CRITICAL();
 
 				// When ball is near the left edge of the paddle when it bounces, horizontal speed is a random number between -2 and -1
-				if(gameBall.posX <= gamePaddle.posX)
+				if(gameBall.posX <= (gamePaddle.posX + gameBall.dim))
 				{
-					gameBall.speedX = rand() % 1 - 2;
+					gameBall.speedX = rand() % 2 - 2;
 				}
 				// When ball is near the right edge of the paddle when it bounces, horizontal speed is a random number between 1 and 2
-				else  if( gameBall.posX + gameBall.dim >= gamePaddle.posX + gamePaddle.dimX )
+				else  if( gameBall.posX >= gamePaddle.posX + gamePaddle.dimX - gameBall.dim )
 				{
-					gameBall.speedX = rand() % 1 + 1;
+					gameBall.speedX = rand() % 2 + 1;
 				}
-				// When completely above the paddle when it bounces, horizontal speed is a random number between -2 and 2
+				// When completely above the paddle when it bounces, horizontal speed is a random number between -1 and 1
 				else
 				{
-					gameBall.speedX = rand() % 4 - 2;
+					gameBall.speedX = rand() % 3 - 1;
 				}
 				(gameBall.numBounces)++;
 				gameBall.speedY = -((gameBall.numBounces)>>1);

@@ -158,8 +158,9 @@ static void process_touch(void)
     slider_pos = slider_touch->ptrPosition->x;
     slider_touched = slider_touch->numPosition;
 
-    /* The slider resolution is 1/4 the size of the screen to reduce jitter in the paddle */
-    uint16_t gamePaddlePos = (slider_pos * 4);
+    /* The slider resolution is less than the size of the screen to reduce jitter in the paddle */
+    uint16_t scale = (DISPLAY_SIZE_X / cy_capsense_context.ptrWdConfig[CY_CAPSENSE_LINEARSLIDER0_WDGT_ID].xResolution);
+    uint16_t gamePaddlePos = (slider_pos * scale);
 
     /* Detect new touch on slider */
     if((0u != slider_touched) && (slider_pos_perv != slider_pos ))
