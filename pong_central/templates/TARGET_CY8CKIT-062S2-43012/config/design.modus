@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration app="BACKEND" formatVersion="13" lastSavedWith="Configurator Backend" lastSavedWithVersion="3.0.0" toolsPackage="ModusToolbox 3.0.0" xmlns="http://cypress.com/xsd/cydesignfile_v4">
+<Configuration app="BACKEND" formatVersion="13" lastSavedWith="Configurator Backend" lastSavedWithVersion="3.10.0" toolsPackage="ModusToolbox 3.1.0" xmlns="http://cypress.com/xsd/cydesignfile_v4">
     <Devices>
         <Device mpn="CY8C624ABZI-S2D44">
             <BlockConfig>
@@ -15,20 +15,14 @@
                     <Personality template="mxs40csd" version="3.0">
                         <Param id="CapSenseEnable" value="true"/>
                         <Param id="CapSenseCore" value="4"/>
-                        <Param id="SensorCount" value="12"/>
-                        <Param id="CapacitorCount" value="3"/>
+                        <Param id="SensorCount" value="6"/>
+                        <Param id="CapacitorCount" value="1"/>
                         <Param id="SensorName0" value="Cmod"/>
-                        <Param id="SensorName1" value="CintA"/>
-                        <Param id="SensorName2" value="CintB"/>
-                        <Param id="SensorName3" value="Button0_Rx0"/>
-                        <Param id="SensorName4" value="Button0_Tx"/>
-                        <Param id="SensorName5" value="Button1_Rx0"/>
-                        <Param id="SensorName6" value="Button1_Tx"/>
-                        <Param id="SensorName7" value="LinearSlider0_Sns0"/>
-                        <Param id="SensorName8" value="LinearSlider0_Sns1"/>
-                        <Param id="SensorName9" value="LinearSlider0_Sns2"/>
-                        <Param id="SensorName10" value="LinearSlider0_Sns3"/>
-                        <Param id="SensorName11" value="LinearSlider0_Sns4"/>
+                        <Param id="SensorName1" value="LinearSlider0_Sns0"/>
+                        <Param id="SensorName2" value="LinearSlider0_Sns1"/>
+                        <Param id="SensorName3" value="LinearSlider0_Sns2"/>
+                        <Param id="SensorName4" value="LinearSlider0_Sns3"/>
+                        <Param id="SensorName5" value="LinearSlider0_Sns4"/>
                         <Param id="CapSenseConfigurator" value="0"/>
                         <Param id="CapSenseTuner" value="0"/>
                         <Param id="CsdAdcEnable" value="false"/>
@@ -406,34 +400,10 @@
                 <Block location="ioss[0].port[8].pin[1]">
                     <Alias value="CYBSP_CSD_BTN0"/>
                     <Alias value="CYBSP_CS_BTN0"/>
-                    <Personality template="pin" version="3.0">
-                        <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
-                        <Param id="initialState" value="1"/>
-                        <Param id="nonSec" value="1"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
-                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
-                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="sioOutputBuffer" value="true"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="inFlash" value="true"/>
-                    </Personality>
                 </Block>
                 <Block location="ioss[0].port[8].pin[2]">
                     <Alias value="CYBSP_CSD_BTN1"/>
                     <Alias value="CYBSP_CS_BTN1"/>
-                    <Personality template="pin" version="3.0">
-                        <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
-                        <Param id="initialState" value="1"/>
-                        <Param id="nonSec" value="1"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
-                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
-                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="sioOutputBuffer" value="true"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="inFlash" value="true"/>
-                    </Personality>
                 </Block>
                 <Block location="ioss[0].port[8].pin[3]">
                     <Alias value="CYBSP_CSD_SLD0"/>
@@ -728,24 +698,6 @@
                 <Mux name="sense" location="csd[0].csd[0]">
                     <Arm>
                         <Port name="ioss[0].port[7].pin[7].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[7].pin[1].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[7].pin[2].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[1].pin[0].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[8].pin[1].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[1].pin[0].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[8].pin[2].analog[0]"/>
                     </Arm>
                     <Arm>
                         <Port name="ioss[0].port[8].pin[3].analog[0]"/>
